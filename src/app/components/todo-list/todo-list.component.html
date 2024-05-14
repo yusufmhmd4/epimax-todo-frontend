@@ -1,0 +1,36 @@
+<div [ngClass]="darktheme?'todo-list-container  dark-todo-list-container':'todo-list-container'">
+  <div class="search-container">
+    <input type="text" placeholder="Search todos" [(ngModel)]="searchTerm" (input)="filterTodos()">
+    <select [(ngModel)]="filter" (change)="filterTodos()" class="dropdown">
+      <option value="all">All</option>
+      <option value="completed">Completed</option>
+      <option value="active">Active</option>
+    </select>
+  </div>
+  <ul class="todos-list-container">
+    <li class="todo-item" *ngFor="let todo of filteredTodos">
+      <button type="button" (click)="onTodoStatusChange(todo.id)" class="checkbox-button">
+        <input [checked]="todo.status" type="checkbox" />
+      </button>
+      <ng-container *ngIf="!todo.editMode; else editMode">
+        <p [ngClass]="todo.status?'description-el complete':'description-el'">{{todo.description}}</p>
+        <button (click)="onEditTodo(todo)" class="todo-item-button">
+          <i [ngClass]="darktheme?'fa-regular fa-pen-to-square dark-icon':'fa-regular fa-pen-to-square'"></i>
+        </button>
+        <button (click)="onDeleteTodo(todo.id)" class="todo-item-button"><i class="fa-solid fa-trash-can" style="color:red"></i></button>
+      </ng-container>
+      <ng-template #editMode>
+        <input type="text" [(ngModel)]="editedDescription"  class="description-edit" (keydown)="onKeyDowm($event)"/>
+        <button (click)="onCancelEdit(todo)" class="cancel-save-button" style="border:none;background:#fff">
+          <i class="fa-solid fa-xmark" style="color:red"></i>
+        </button>
+        <button (click)="onSaveEdit(todo)" class="cancel-save-button" style="border:none;background:#fff">
+          <i class="fa-solid fa-floppy-disk" style="color:green"></i>
+        </button>
+      </ng-template>
+    </li>
+    <div *ngIf="filteredTodos?.length === 0" class="empty-container">
+      <img src="https://res.cloudinary.com/ds2zurapw/image/upload/v1715604983/asrjjxchg8mg5sugtfmk.png" alt="Empty Todos" class="empty-todos"/>
+    </div>
+  </ul>
+</div>

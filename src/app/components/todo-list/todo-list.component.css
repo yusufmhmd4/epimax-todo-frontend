@@ -1,0 +1,138 @@
+.todo-list-container {
+  margin-top: 14px;
+  width: 100%;
+  max-width: 650px;
+  margin: auto;
+}
+
+.dark-todo-list-container{
+  background-color: black;
+  color: #fff;
+}
+
+.dark-todo-list-container .search-container input{
+  border: 1px solid rgba(247, 247, 247, 1);
+  background-color: transparent;
+  color: #fff;
+}
+
+
+
+.search-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-container input {
+  flex-grow: 1;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.54rem;
+  border: 1px solid #6c63ff;
+  outline: none;
+  border-radius: 3px;
+  font-size: 12px;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+  color: black
+}
+
+.search-containe input::placeholder {
+  color: rgba(195, 193, 229, 1);
+}
+
+.dropdown {
+  font-size: 0.9rem;
+  padding: 0.5rem 0.54rem;
+  background-color: #6c63ff;
+  outline: none;
+  border-radius: 3px;
+  font-size: 12px;
+  color: #fff;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+
+.todos-list-container{
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.empty-container{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.empty-todos{
+  width: 100%;
+  max-width: 280px;
+}
+
+.todo-item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 16px;
+}
+.description-el{
+  width: 100%;
+  margin-left: 8px;
+  margin-right: 8px;
+  font-family: "Ubuntu Sans", "sans-serif";
+
+}
+
+.complete{
+  text-decoration: line-through;
+}
+
+.description-edit{
+  width: 100%;
+  border: 1px solid #bfbfbf;
+  padding: 6px 10px;
+  margin-left: 4px;
+  margin-left: 4px;
+  border-radius: 4px;
+  outline: none;
+  align-items: center;
+}
+
+.todo-item-button{
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.dark-icon{
+  color: #fff;
+}
+
+.checkbox-button{
+  border: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.checkbox-button input{
+  cursor: pointer;
+}
+
+.cancel-save-button{
+  margin-left: 6px;
+  margin-right: 6px;
+  padding: 4px 6px;
+  border: 1px solid #bfbfbf;
+  color: #000;
+  border-radius: 2px;
+  font-family: "Ubuntu Sans", "sans-serif";
+  cursor: pointer;
+
+}

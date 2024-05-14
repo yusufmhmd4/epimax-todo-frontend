@@ -1,0 +1,35 @@
+<div [ngClass]="darkTheme ? 'dark-app app' : 'app'">
+  <div
+    [ngClass]="
+      darkTheme ? 'app-container  dark-app-container' : 'app-container'
+    "
+  >
+    <header>
+      <nav>
+        <h1>Todo List</h1>
+        <button class="theme-button" (click)="onThemeChange()">
+          <img
+            [src]="
+              darkTheme
+                ? 'https://res.cloudinary.com/ds2zurapw/image/upload/v1715601872/fng92p27mgjphcjgvurt.png'
+                : 'https://res.cloudinary.com/ds2zurapw/image/upload/v1715602050/clghzrt4pvjursj3ckuf.png'
+            "
+            alt="Theme Image"
+            class="theme-image"
+          />
+        </button>
+      </nav>
+    </header>
+    <div class="add-todo-button-container">
+      <button (click)="openModal()" class="add-todo-button">
+        <i class="fa-solid fa-circle-plus" style="font-size:40px;color:#6c63ff"></i>
+      </button>
+    </div>
+    <app-todo-list [darktheme]="darkTheme"></app-todo-list>
+
+    <app-add-todo
+      *ngIf="modalOpenButton"
+      [darktheme]="darkTheme"
+    ></app-add-todo>
+  </div>
+</div>

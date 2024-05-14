@@ -1,0 +1,79 @@
+.app{
+  width: 100%;
+  height: 100%;
+}
+
+.dark-app{
+  background-color: #000;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 1110px;
+  margin: auto;
+  padding-top: 10px;
+  padding: 25px;
+  height: 100vh;
+}
+@media screen and (min-width: 768px) {
+  .app-container {
+    padding-top: 35px;
+  }
+}
+
+.dark-app-container{
+  background-color: black;
+  color: #fff;
+}
+
+.dark-app-container header nav h1{
+  color: #fff;
+}
+
+
+header {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.4rem;
+}
+
+header nav h1 {
+  font-family: "Ubuntu Sans", "sans-serif";
+  font-size: 25px;
+  font-weight: 700;
+  color: #000;
+}
+
+.theme-button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.theme-button img {
+  border-radius: 60%;
+}
+
+.add-todo-button-container {
+  text-align: center;
+  width: 100%;
+  bottom: 10px;
+  max-width: 650px;
+  margin: auto;
+  /* background-color: red; */
+
+}
+
+.add-todo-button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
