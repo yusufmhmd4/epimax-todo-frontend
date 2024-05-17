@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Todo } from '../todo.model';
 import { Observable } from 'rxjs';
@@ -7,45 +7,28 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TodoService {
-  apiUrl = 'https://localhost:7082/api/Todos';
-  darkTheme:boolean=false
-  modalOpenButton:boolean=false;
-
-  themeChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
-  updateModelOpen:EventEmitter<boolean> =new EventEmitter<boolean>();
-
-  openAndCloseModel(){
-    this.modalOpenButton=!this.modalOpenButton
-    this.updateModelOpen.emit(this.modalOpenButton)
-  }
-
-  updateTheme() {
-    this.darkTheme = !this.darkTheme;
-    this.themeChanged.emit(this.darkTheme);
-  }
-
+  apiUrl = 'https://localhost:44311/api/services/app/ToDoItem/';
+ 
   constructor(private http: HttpClient) {}
 
-
-
-  getTodos():Observable<Todo[]> {
-    return this.http.get<Todo[]>(this.apiUrl)
-    }
+  getTodos(): Observable<Todo[]> {
+    return this.http.get<Todo[]>(this.apiUrl+"GetAll");
+  }
 
   addTodo(todo: Todo) {
-    return this.http.post<Todo>(this.apiUrl, todo);
+    return this.http.post<Todo>(this.apiUrl+"Create", todo);
   }
 
   updateTodoStatus(id: number){
-    return this.http.patch(`${this.apiUrl}/${id}`, {});
+    return this.http.put(`${this.apiUrl}UpdateIsCompleted?id=${id}`, {});
   }
-
+  
   deleteTodo(id: number) {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}Delete?id=${id}`);
   }
 
   updateTodoDescription(id: number, description: string) {
-    return this.http.patch(`${this.apiUrl}/description/${id}`, `"${description}"`, { headers: { 'Content-Type': 'application/json' } });
+    return this.http.put(`${this.apiUrl}UpdateDescription?id=${id}&newDescription=${description}`, { headers: { 'Content-Type': 'application/json' } });
   }
   
 }

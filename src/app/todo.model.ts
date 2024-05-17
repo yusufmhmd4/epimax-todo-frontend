@@ -1,7 +1,7 @@
 export interface Todo {
     id?: number; 
     description: string;
-    status?: boolean;
+    isCompleted?: boolean;
     editMode?:boolean;
   }
   

@@ -1,55 +1,71 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
 import { Todo } from '../../todo.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css',
 })
 export class TodoListComponent implements OnInit {
- @Input() darktheme:any;
- 
+  constructor(private todoService: TodoService) {}
+
+  @Input() darktheme: any;
+  @Input() addTodoModal: any;
+  @Output() ChangeModal = new EventEmitter<void>();
+
+  onModelClose() {
+    this.ChangeModal.emit();
+  }
+
+  description: string = '';
+
   todos: Todo[] = [];
   filteredTodos: Todo[] = [];
   editedDescription: string = '';
- 
+
   searchTerm: string = '';
   filter: string = 'all';
-  private todoAddedSubscription: Subscription | undefined;
 
-  constructor(private todoService: TodoService,private shared:SharedService) {}
+  onKeyPress(event: any) {
+    console.log(event.key);
+    if (event.key === 'Enter') {
+      this.addTodo();
+    }
+  }
+  
+  addTodo() {
+    // console.log(event)
+    if (this.description.trim() !== '') {
+      const newTodo = { description: this.description, status: false };
+      this.onModelClose()
+      this.todoService.addTodo(newTodo).subscribe({
+        next: () => {
+          this.description = '';
+          this.getTodoListData() 
+        },
+      });
+    } else {
+      alert('Please enter a todo description');
+    }
+  }
 
   ngOnInit(): void {
     this.getTodoListData();
-    this.todoAddedSubscription = this.shared.onTodoAdded().subscribe(() => {
-      this.getTodoListData();
-    });
-   
   }
 
-getTodoListData(): void {
-  this.shared.getAllTodos().subscribe((todos: Todo[]) => {
-    this.todos = todos;
-    this.filteredTodos = todos;
-    this.filterTodos();
-  });
-}
-
-
-  // getAllTodos(): void {
-  //   this.todoService.getTodos().subscribe((todos: Todo[]) => {
-  //     this.todos = todos;
-  //     this.filteredTodos = todos;
-  //     this.filterTodos();
-  //   });
-  // }
+  getTodoListData(): void {
+    this.todoService.getTodos().subscribe((todos: any) => {
+      console.log(todos);
+      this.todos = todos.result;
+      this.filteredTodos = todos;
+      this.filterTodos();
+    });
+  }
 
   onEditTodo(todo: Todo) {
     todo.editMode = true;
@@ -60,18 +76,22 @@ getTodoListData(): void {
     todo.editMode = false;
   }
 
-  onKeyDowm(event:any){
-    if(event.key==='Enter'){
-      console.log(event)
+  onKeyDowm(event: any) {
+    if (event.key === 'Enter') {
+      console.log(event);
     }
   }
 
   onSaveEdit(todo: Todo) {
-    if (todo.id !== undefined) {
-      this.todoService.updateTodoDescription(todo.id, this.editedDescription).subscribe(() => {
-        todo.description = this.editedDescription || '';
-        todo.editMode = false;
-      });
+    if (todo.id !== undefined && this.editedDescription.trim()!=="" ) {
+      this.todoService
+        .updateTodoDescription(todo.id, this.editedDescription)
+        .subscribe(() => {
+          todo.description = this.editedDescription || '';
+          todo.editMode = false;
+        });
+    }else{
+      alert("Description is Required")
     }
   }
 
@@ -89,7 +109,7 @@ getTodoListData(): void {
 
   filterTodos() {
     if (this.searchTerm.trim() !== '') {
-      this.filteredTodos = this.todos.filter(todo =>
+      this.filteredTodos = this.todos.filter((todo) =>
         todo.description.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     } else {
@@ -97,9 +117,13 @@ getTodoListData(): void {
     }
 
     if (this.filter === 'completed') {
-      this.filteredTodos = this.filteredTodos.filter(todo => todo.status);
+      this.filteredTodos = this.filteredTodos.filter(
+        (todo) => todo.isCompleted
+      );
     } else if (this.filter === 'active') {
-      this.filteredTodos = this.filteredTodos.filter(todo => !todo.status);
+      this.filteredTodos = this.filteredTodos.filter(
+        (todo) => !todo.isCompleted
+      );
     }
   }
 }

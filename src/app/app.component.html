@@ -21,15 +21,16 @@
       </nav>
     </header>
     <div class="add-todo-button-container">
-      <button (click)="openModal()" class="add-todo-button">
+      <button (click)="onModalChange()" class="add-todo-button">
         <i class="fa-solid fa-circle-plus" style="font-size:40px;color:#6c63ff"></i>
       </button>
     </div>
-    <app-todo-list [darktheme]="darkTheme"></app-todo-list>
 
-    <app-add-todo
-      *ngIf="modalOpenButton"
+    <app-todo-list    
       [darktheme]="darkTheme"
-    ></app-add-todo>
+      [addTodoModal]="addTodoModal"
+      (ChangeModal)="onModalChange()"
+     
+    ></app-todo-list>
   </div>
 </div>

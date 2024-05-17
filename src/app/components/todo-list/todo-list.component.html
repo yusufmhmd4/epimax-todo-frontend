@@ -10,10 +10,10 @@
   <ul class="todos-list-container">
     <li class="todo-item" *ngFor="let todo of filteredTodos">
       <button type="button" (click)="onTodoStatusChange(todo.id)" class="checkbox-button">
-        <input [checked]="todo.status" type="checkbox" />
+        <input [checked]="todo.isCompleted" type="checkbox" />
       </button>
       <ng-container *ngIf="!todo.editMode; else editMode">
-        <p [ngClass]="todo.status?'description-el complete':'description-el'">{{todo.description}}</p>
+        <p [ngClass]="todo.isCompleted?'description-el complete':'description-el'">{{todo.description}}</p>
         <button (click)="onEditTodo(todo)" class="todo-item-button">
           <i [ngClass]="darktheme?'fa-regular fa-pen-to-square dark-icon':'fa-regular fa-pen-to-square'"></i>
         </button>
@@ -33,4 +33,22 @@
       <img src="https://res.cloudinary.com/ds2zurapw/image/upload/v1715604983/asrjjxchg8mg5sugtfmk.png" alt="Empty Todos" class="empty-todos"/>
     </div>
   </ul>
+</div>
+<div class="modal" *ngIf="addTodoModal">
+  <div [ngClass]="darktheme ? 'modal-content  dark-modal-content': 'modal-content'">
+    <h2>Add Todo</h2>
+    <form>
+      <input
+        type="text"
+        [(ngModel)]="description"
+        name="todoDescription"
+        placeholder="Enter todo description"
+        (keydown)="onKeyPress($event)"
+      />
+      <div class="button-container">
+        <button class="close" (click)="onModelClose()">Cancel</button>
+        <button type="button" (click)="addTodo()">Add</button>
+      </div>
+    </form>
+  </div>
 </div>

@@ -5,18 +5,16 @@
   margin: auto;
 }
 
-.dark-todo-list-container{
+.dark-todo-list-container {
   background-color: black;
   color: #fff;
 }
 
-.dark-todo-list-container .search-container input{
+.dark-todo-list-container .search-container input {
   border: 1px solid rgba(247, 247, 247, 1);
   background-color: transparent;
   color: #fff;
 }
-
-
 
 .search-container {
   width: 100%;
@@ -35,7 +33,7 @@
   font-size: 12px;
   margin-top: 0.8rem;
   margin-bottom: 0.8rem;
-  color: black
+  color: black;
 }
 
 .search-containe input::placeholder {
@@ -54,44 +52,42 @@
   margin-left: 4px;
 }
 
-
-.todos-list-container{
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
-    width: 100%;
+.todos-list-container {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  width: 100%;
 }
 
-.empty-container{
+.empty-container {
   text-align: center;
   margin-top: 20px;
 }
 
-.empty-todos{
+.empty-todos {
   width: 100%;
   max-width: 280px;
 }
 
-.todo-item{
+.todo-item {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   margin-bottom: 16px;
 }
-.description-el{
+.description-el {
   width: 100%;
   margin-left: 8px;
   margin-right: 8px;
   font-family: "Ubuntu Sans", "sans-serif";
-
 }
 
-.complete{
+.complete {
   text-decoration: line-through;
 }
 
-.description-edit{
+.description-edit {
   width: 100%;
   border: 1px solid #bfbfbf;
   padding: 6px 10px;
@@ -102,7 +98,7 @@
   align-items: center;
 }
 
-.todo-item-button{
+.todo-item-button {
   background-color: transparent;
   border: none;
   outline: none;
@@ -110,22 +106,22 @@
   margin-right: 10px;
 }
 
-.dark-icon{
+.dark-icon {
   color: #fff;
 }
 
-.checkbox-button{
+.checkbox-button {
   border: none;
   background-color: transparent;
   outline: none;
   cursor: pointer;
 }
 
-.checkbox-button input{
+.checkbox-button input {
   cursor: pointer;
 }
 
-.cancel-save-button{
+.cancel-save-button {
   margin-left: 6px;
   margin-right: 6px;
   padding: 4px 6px;
@@ -134,5 +130,87 @@
   border-radius: 2px;
   font-family: "Ubuntu Sans", "sans-serif";
   cursor: pointer;
+}
 
+.modal {
+  font-family: "Ubuntu Sans", "sans-serif";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.modal-content {
+  background-color: #fff;
+  width: 100%;
+  max-width: 360px;
+  border-radius: 0.2rem;
+  margin: 0.6rem;
+  padding: 0.8rem;
+}
+
+.dark-modal-content {
+  background-color: black;
+  color: #fff;
+  border: 1px solid #bfbfbf;
+}
+
+.modal-content h2 {
+  font-size: 20px;
+  text-align: center;
+}
+
+.modal-content form input {
+  width: 100%;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.4rem;
+  border: 1px solid #6c63ff;
+  outline: none;
+  border-radius: 0.1rem;
+  font-size: 12px;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.dark-modal-content form input {
+  border: 1px solid rgba(247, 247, 247, 1);
+  background-color: transparent;
+  color: #fff;
+}
+
+.modal-content form input::placeholder {
+  color: rgba(195, 193, 229, 1);
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.button-container button {
+  width: 70px;
+  border: none;
+  border-radius: 2px;
+  color: #fff;
+  background-color: #6c63ff;
+  padding: 0.2rem 0.4rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.button-container .close {
+  background-color: transparent;
+  color: #6c63ff;
+  border: 1px solid #6c63ff;
+}
+
+.dark-close {
+  background-color: black;
 }
